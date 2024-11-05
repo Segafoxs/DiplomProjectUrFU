@@ -1,4 +1,4 @@
-
+/* Стили для файла example */
 .form-auth{
   position: absolute;
   top: 50%;
@@ -7,7 +7,44 @@
 
 }
 
+/* боковая панель #2E8B57 */
+aside {
+    float: left;
+    background: #2E8B57;
+    width: 18%;
+    padding: 2.5%;
+    height: 100vh;
+    color: #fff;
+
+
+}
+
+aside h3 {
+    margin-top: 10px;
+    font-size: 28px;
+}
+
+
+aside ul {
+    list-style: none;
+    font-size: 18px;
+
+}
+
+aside ul li:hover, aside ul a:hover {
+    color: #fff;
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+aside ul li {
+    margin-top: 20%;
+
+}
 
 
 
+.profile {
 
+    margin-top: 100%;
+}

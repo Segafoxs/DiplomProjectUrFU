@@ -12,13 +12,19 @@
     <link rel="stylesheet" href="{% static 'hello/css/style.css' %}">
 </head>
 <body>
+
     <aside>
         <h3>Навигация</h3>
         <ul>
-            <li>Создать наряд-допуск</li>
-            <li>Текущие наряд-допуски</li>
-            <li>Наряд-допуск на согласовании</li>
+            <a style="color: white" href="{% url 'welcomePage'%}"><li>Главная</li></a>
+            <a style="color: white" href="{% url 'workPermit'%}"><li>Создать наряд-допуск</li></a>
+            <a style="color: white" href="{% url 'currentPermit'%}"><li>Текущие наряд-допуски</li></a>
+            <a style="color: white" href=""><li>Наряд-допуск на согласовании: {{count}}</li></a>
         </ul>
+        <ul class="profile">
+            <a style="color: white" href="{% url 'welcomePage'%}"><li>Профиль</li></a>
+        </ul>
+
     </aside>
     <main>
         {% block content %}
@@ -28,3 +34,4 @@
 
 </body>
 </html>
+
