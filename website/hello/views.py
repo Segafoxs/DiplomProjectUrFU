@@ -1,8 +1,21 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import login, authenticate
 from docxtpl import DocxTemplate
 
-def index(request):
+def authFunc(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('login')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect("/welcomePage/")
+        else:
+            return HttpResponse("<h2>{\nmessage: Неверный логин или пароль}</h2>", status=401, reason="Incorrect data")
+
     return render(request, 'hello/authorization/index.html')
 
 def first_page(request):
