@@ -30,9 +30,8 @@ def current_permit(request):
 
 
 def insert_into_doc(manager, managerPost, executor, executorPost,
-                    countMember, member, work, dateStart, timeStart, dateEnd,
-                    timeEnd, conditions, director, directorPost,
-                    personal, personalPost):
+                    countMember, member, work, dateStart, timeStart, dateEnd, timeEnd, dateDelivery, timeDelivery,
+                    conditions, director, directorPost, personal, personalPost):
     doc = DocxTemplate("C:\\Users\\Сергей\\Desktop\\диплом\\test.docx")
     context = {
                 'manager': manager,
@@ -46,6 +45,8 @@ def insert_into_doc(manager, managerPost, executor, executorPost,
                 'timeStart': timeStart,
                 'dateEnd': dateEnd,
                 'timeEnd': timeEnd,
+                'dateDelivery': dateDelivery,
+                'timeDelivery': timeDelivery,
                 'conditions': conditions,
                 'director': director,
                 'directorPost': directorPost,
@@ -82,7 +83,11 @@ def postuser(request):
     dateEnd = request.POST.get("dateEnd")
     timeEnd = request.POST.get("timeEnd")
 
+    dateDelivery = request.POST.get("dateDelivery")
+    timeDelivery = request.POST.get("timeDelivery")
+
     conditions = request.POST.get("conditions")
+
 
     director = request.POST.get("director")
     directorPost = request.POST.get("directorPost")
@@ -92,10 +97,9 @@ def postuser(request):
 
 
     insert_into_doc(manager, managerPost, executor, executorPost,
-                    countMember, member, work, dateStart, timeStart, dateEnd,
-                    timeEnd, conditions, director, directorPost,
-                    personal, personalPost)
+                    countMember, member, work, dateStart, timeStart, dateEnd, timeEnd, dateDelivery, timeDelivery,
+                    conditions, director, directorPost, personal, personalPost)
 
     return HttpResponse(f'Руководитель: {manager}, Производитель: {executor}, '
                         f'Количество членов бригады: {countMember}, Члены бригады: {member},'
-                        f'{work}')
+                        f'{dateStart}')
