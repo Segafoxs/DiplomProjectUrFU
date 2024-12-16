@@ -1,0 +1,23 @@
+{% extends 'hello/example.html' %}
+
+{% block title %}
+    Cоздание наряда-допуск
+
+
+{% endblock %}
+{% block content %}
+<form method="post" action="submitPermit/">
+    <div class="container-fluid">
+        <p class="text-start">Наряд допуск выдал: {{directorPost}} {{directorName}}
+        <p class="text-start">Руководитель работ: {{managerPost}} {{managerName}}</p>
+        <p>Производитель работ: {{executorPost}} {{executorName}}</p>
+        <p>Допускащий к работе: {{shiftManagerPost}} {{shiftManagerName}}</p>
+        <p>Название работы: {{ work.name }} </p>
+        <p>Дата начала работы: {{ work.dateStart }} {{work.timeStart}}</p>
+        <p>Дата окончания работы: {{ work.dateEnd}} {{work.timeEnd}}</p>
+        <p>Особые условия: {{conditions}}</p>
+        <p>Дата выдачи наряда: {{permit.dateDelivery}}</p>
+        <button type="submit">Сформировать наряд-допуск</button>
+    </div>
+</form>
+{% endblock %}

@@ -2,63 +2,103 @@
 
 {% block title %}
     Cоздание наряда-допуск
+
 {% endblock %}
 
 {% block content %}
 
 <h3 xmlns="http://www.w3.org/1999/html">Оформление наряда-допуска</h3>
 
+    <form method="post" action="postDirector/">
 
-    <form method="post" action="postuser/">
-            {% csrf_token %}
-            <div class="row">
-                    <div class="col-md-4 mb-4 pb-2">
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name="managerPost" id="form3Examplev2" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev2">Должность руководителя</label>
-                      </div>
-
-                    </div>
-                    <div class="col-md-4 mb-4 pb-2">
-
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name="manager" id="form3Examplev3" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev3">ФИО руководителя</label>
-                      </div>
-                    </div>
-            </div>
-            <div class="row">
-                    <div class="col-md-4 mb-4 pb-2">
-
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name="executorPost" id="form3Examplev21" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev21">Должность производителя</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4 mb-4 pb-2">
-
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name="executor" id="form3Examplev31" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev31">ФИО производителя</label>
-                      </div>
-                    </div>
-            </div>
+        {% csrf_token %}
         <div class="row">
-                    <div class="col-md-2 mb-4 pb-2">
+        <div class="col-md-4 mb-4 pb-2">
+            <input type="text" name="search_director" id="form1Examplev3" class="form-control form-control-lg" placeholder="ФИО"/>
+            <label class="form-label" for="form3Examplev3">Наряд-допуск выдал</label>
+        </div>
+        <div class="col-md-4 mb-4 pb-2">
+            <button class="btn btn-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg></button>
+        </div>
+        </div>
+    </form>
 
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name=countMember id="form3Examplev41" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev2">Количество членов бригады</label>
-                      </div>
-                    </div>
-                    <div class="col-md-8 mb-4 pb-2">
 
-                      <div class="col-md-9 pe-1">
-                          <textarea name="member" class="form-control" rows="3"></textarea>
-                          Должность, ФИО, разряд членов бригады
-                      </div>
-                    </div>
+    <form method="post" action="postManager/">
+
+        {% csrf_token %}
+        <div class="row">
+        <div class="col-md-4 mb-4 pb-2">
+            <input type="text" name="search_manager" id="form3Examplev3" class="form-control form-control-lg" placeholder="ФИО"/>
+            <label class="form-label" for="form3Examplev3">Руководитель работ</label>
+        </div>
+        <div class="col-md-4 mb-4 pb-2">
+            <button class="btn btn-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg></button>
+        </div>
+        </div>
+    </form>
+
+
+
+    <form method="post" action="postExecutor/">
+            {% csrf_token %}
+
+
+        <div class="row">
+        <div class="col-md-4 mb-4 pb-2">
+            <input type="text" name="search_executor" id="form31Examplev3" class="form-control form-control-lg" placeholder="ФИО"/>
+            <label class="form-label" for="form3Examplev3">Производитель работ</label>
+        </div>
+        <div class="col-md-4 mb-4 pb-2">
+            <button class="btn btn-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg></button>
+        </div>
+        </div>
+    </form>
+        <div class="row">
+<!--                    <div class="col-md-2 mb-4 pb-2">-->
+
+<!--                      <div data-mdb-input-init class="form-outline">-->
+<!--                        <input type="text" id="countInp" size="1" maxlength="1"/>-->
+<!--                        <label class="form-label" for="form3Examplev2">Количество членов бригады</label>-->
+<!--                        <form id="myForm">-->
+
+
+<!--                        <input type="submit" id="btnSub"/>-->
+<!--                        </form>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-8 mb-4 pb-2">-->
+
+<!--                      <div class="col-md-9 pe-1">-->
+<!--                          <textarea name="member" class="form-control" rows="3"></textarea>-->
+<!--                          Должность, ФИО, разряд членов бригады-->
+<!--                      </div>-->
+<!--                    </div>-->
             </div>
+        <form method="post" action="postShiftManager/">
+
+        {% csrf_token %}
+        <div class="row">
+        <div class="col-md-4 mb-4 pb-2">
+            <input type="text" name="search_shiftManager" id="form3Examplev34" class="form-control form-control-lg" placeholder="ФИО"/>
+            <label class="form-label" for="form3Examplev3">Допускающий (начальник смены, участка)</label>
+        </div>
+        <div class="col-md-4 mb-4 pb-2">
+            <button class="btn btn-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg></button>
+        </div>
+        </div>
+    </form>
+
+    <form method="post" action="resultWorkPermit/">
+                {% csrf_token %}
             <div class="row align-items-center py-3">
               <div class="col-md-7 pe-5">
 
@@ -125,37 +165,12 @@
                       </div>
                     </div>
                     <div class="col-md-3 mb-4 pb-2">
-
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name="directorPost" id="form7Examplev4" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev3">Должность выдавшего наряд</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4 mb-4 pb-2">
-
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name="director" id="form7Examplev5" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev3">ФИО</label>
-                      </div>
-                    </div>
-            </div>
-            <div class="row">
-                    <div class="col-md-4 mb-4 pb-2">
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name="personalPost" id="form6Examplev2" placeholder="Должность" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev2">Дежурный персонал других цехов</label>
-                      </div>
-
-                    </div>
-                    <div class="col-md-4 mb-4 pb-2">
-
-                      <div data-mdb-input-init class="form-outline">
-                        <input type="text" name="personal" id="form6Examplev3" placeholder="ФИО" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev3">ФИО</label>
-                      </div>
-                    </div>
             </div>
         </div>
+        <div>
+                <input type="submit" value="Далее"/>
+        </div>
+    </form>
 
 
 
@@ -174,8 +189,10 @@
 <!--        <p>Особые условия: <input type="text" name="conditions" placeholder="Особые условия"></p>-->
 <!--        <p>Наряд выдал: дата <input type="text" name="dateStart" placeholder="Дата">, должность <input type="text" name="directorPost" placeholder="Должность">  <input type="text" name="director" placeholder="ФИО"></p>-->
 <!--        <p>Дежурный персонал других цехов (участков) <input type="text" name="personalPost" placeholder="Должность">  <input type="text" name="personal" placeholder="ФИО"></p>-->
-<!--        <input type="submit" value="Send"/>-->
-        <input type="submit" value="Send"/>
+
+
+
+<!--        <a href="{% url 'resultPermit' %}">Далее</a>-->
     </form>
 
 
