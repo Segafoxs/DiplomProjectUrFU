@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hello',
+    "django_tables2",
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -77,9 +79,13 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'euraz',
+        'USER': 'postgres',
+        'PASSWORD': 'Admin1',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
 }
 
 

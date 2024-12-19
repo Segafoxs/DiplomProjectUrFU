@@ -55,7 +55,7 @@ class CustomUserManager(BaseUserManager):
 
 class Employee(AbstractBaseUser, PermissionsMixin):
     roles = {
-        "DIRECTOR": "DIRECTOR",
+        "DIRECTOR": "Начальник цеха",
         "MASTER": "MASTER",
         "WORKER": "WORKER",
         "DAILYMANAGER": "DAILYMANAGER",
@@ -83,21 +83,20 @@ class Employee(AbstractBaseUser, PermissionsMixin):
 
 
 class Permit(models.Model):
-    type_of_permit = {
-        "SIMPLE": "simple",
-        "LINEAR": "linear",
-        "FIRE": "fire",
+    statusPermit = {
+        "approval": "На согласовании",
+        "work": "В работе",
+        "closed": "Закрыт",
     }
 
+    number = models.BigAutoField(primary_key=True)
+    status = models.CharField(max_length=255, choices=statusPermit, default=statusPermit["approval"])
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, verbose_name="Департамент")
-    type_of_permit_create = models.CharField(max_length=255, choices=type_of_permit)
-    number = models.CharField(max_length=255, null=False)
     master_of_work = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="masterofwork")
     executor = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="executorofwork")
     countWorker = models.CharField(max_length=255, null=False)
     employ = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="employofwork")
-    master = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="master")
-    master_signature = models.CharField(max_length=255)
+    #master_signature = models.CharField(max_length=255)
     work_description = models.CharField(max_length=255)
     start_of_work = models.DateTimeField(max_length=255)
     end_of_work = models.DateTimeField(max_length=255)
@@ -112,16 +111,16 @@ class Permit(models.Model):
     condition = models.CharField(max_length=255)
 
     director = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="time")
-    signature_from_director = models.CharField(max_length=255)
+    #signature_from_director = models.CharField(max_length=255)
 
     daily_manager = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="dailymanager")
-    signature_from_daily_manager = models.CharField(max_length=255)
+    #signature_from_daily_manager = models.CharField(max_length=255)
 
     station_engineer = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, related_name="statengineer")
-    signature_from_station_engineer = models.CharField(max_length=255)
+    #signature_from_station_engineer = models.CharField(max_length=255)
 
-    create_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    #create_at = models.DateTimeField()
+    #updated_at = models.DateTimeField()
 
     # file_name = models.CharField(max_length=255)
     # file_path = models.CharField(max_length=255)
@@ -134,32 +133,29 @@ class Permit(models.Model):
         using=None,
         update_fields=None,
     ):
-        # if self.signature_from_daily_manager:
-        #     hp = HistoryPermit(
-        #
-        #     )
-        #     hp.save()
+    #     # if self.signature_from_daily_manager:
+    #     #     hp = HistoryPermit(
+    #     #
+    #     #     )
+    #     #     hp.save()
         super(Permit, self).save(*args)
 
     def __str__(self):
-        return self.number
+        return self.type_of_permit
 
     def to_docx(self):
         doc = DocxTemplate("C:\\Users\\Сергей\\Desktop\\Шаблоны для ЭНД\\test.docx")
         context = {
             'manager': self.master_of_work,
-            'managerPost': self.master,
+            'managerPost': self.master_of_work,
             'executor': self.executor,
             'executorPost': self.executor,
-            'countMember': self.master,
-            'member': self.executor,
+            'member': self.employ,
             'work': self.work_description,
             'dateStart': self.start_of_work,
             'timeStart': self.start_of_work,
             'dateEnd': self.end_of_work,
             'timeEnd': self.end_of_work,
-            'dateDelivery': self.master,
-            'timeDelivery': self.master,
             'conditions': self.condition,
             'director': self.director,
             'directorPost': self.director,

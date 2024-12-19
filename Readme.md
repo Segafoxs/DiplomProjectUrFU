@@ -19,3 +19,11 @@ Service:
 - user management 
 - notify Manager about any change, submit and signature
 - generate docx file with signature. 
+
+
+
+
+
+Добавить форму выбора типа наряда
+Добавить форму выбора цеха
+Добавить список требований к работе

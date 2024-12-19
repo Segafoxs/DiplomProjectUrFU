@@ -1,0 +1,37 @@
+{% extends 'hello/example.html' %}
+
+{% block title %}
+    Текущие наряды-допуски
+{% endblock %}
+
+{% block content %}
+    <h1>Наряды-допуски на согласовании</h1>
+    {% if permit_list %}
+    <table class="table table-sm">
+    {% for permit in permit_list %}
+        <thead>
+                        <tr>
+                          <th scope="col">Номер наряда</th>
+                          <th scope="col">Руководитель работ</th>
+                          <th scope="col">Работа</th>
+                          <th scope="col">Дата начала работы</th>
+                          <th scope="col">Дата окончания работы</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{permit.number}}</td>
+                            <td>{{master}}</td>
+                          <td>{{permit.work_description}}</td>
+                          <td>{{permit.start_of_work}}</td>
+                          <td>{{permit.end_of_work}}</td>
+
+                        </tr>
+
+                      </tbody>
+    {% endfor %}
+    </table>
+    {% else %}
+    <p>Документов на согласовании нет</p>
+    {% endif %}
+{% endblock %}

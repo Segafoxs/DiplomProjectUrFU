@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from docxtpl import DocxTemplate
-from .myModels import Work, Manager, Executor, Director, Permit, ShiftManager
+from .myModels import Work_is_mymodel, Manager_is_mymodel, Executor_is_mymodel, Director_is_mymodel, Permit_is_mymodel, ShiftManager_is_mymodel
+import random
 
 def insert_into_doc(manager, executor, countMember, member, work, permit, director, personal):
     doc = DocxTemplate("C:\\Users\\Сергей\\Desktop\\диплом\\test.docx")
@@ -28,5 +29,7 @@ def insert_into_doc(manager, executor, countMember, member, work, permit, direct
     doc.render(context)
     doc.save("final.docx")
     return {"message": "success"}
+
+
 
 

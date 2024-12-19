@@ -2,40 +2,40 @@ from django.db import models
 
 # Create your models here.
 
-class Work(models.Model):
+class Work_is_mymodel(models.Model):
     name: str
     dateStart: str
     timeStart: str
     dateEnd: str
     timeEnd: str
 
-class Worker(models.Model):
+class Worker_is_mymodel(models.Model):
 
-    #Разряд работника
-    discharge: str | None = None
-
-    def __init__(self, name, postemploee):
+    def __init__(self, name, role):
         self.name = name
-        self.postemploee = postemploee
+        self.role = role
 
 
-class Manager(Worker):
+class Manager_is_mymodel(Worker_is_mymodel):
     pass
 
 
-class Executor(Worker):
+class Executor_is_mymodel(Worker_is_mymodel):
     pass
 
-class Director(Worker):
+class Director_is_mymodel(Worker_is_mymodel):
     pass
 
 
-class Permit():
+class Permit_is_mymodel():
     #номер наряда будет равен id в базе данных
     dateDelivery: str
     timeDelivery: str
     conditions: str
 
 
-class ShiftManager(Worker):
+class ShiftManager_is_mymodel(Worker_is_mymodel):
    pass
+
+
+

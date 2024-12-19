@@ -7,17 +7,18 @@
 {% endblock %}
 {% block content %}
 <form method="post" action="submitPermit/">
+
     <div class="container-fluid">
-        <p class="text-start">Наряд допуск выдал: {{directorPost}} {{directorName}}
-        <p class="text-start">Руководитель работ: {{managerPost}} {{managerName}}</p>
-        <p>Производитель работ: {{executorPost}} {{executorName}}</p>
-        <p>Допускащий к работе: {{shiftManagerPost}} {{shiftManagerName}}</p>
-        <p>Название работы: {{ work.name }} </p>
-        <p>Дата начала работы: {{ work.dateStart }} {{work.timeStart}}</p>
-        <p>Дата окончания работы: {{ work.dateEnd}} {{work.timeEnd}}</p>
-        <p>Особые условия: {{conditions}}</p>
+        <p class="text-start">Наряд допуск выдал: {{permit.director}}
+        <p class="text-start">Руководитель работ: {{permit.master_of_work}} </p>
+        <p>Производитель работ: {{permit.executor}} {{new_permit.executor}}</p>
+        <p>Допускащий к работе: {{permit.daily_manager}} {{shiftManagerName}}</p>
+        <p>Название работы: {{ permit.work_description }} </p>
+        <p>Дата начала работы: {{ permit.start_of_work }} {{work.timeStart}}</p>
+        <p>Дата окончания работы: {{ permit.end_of_work}} {{work.timeEnd}}</p>
+        <p>Особые условия: {{ permit.condition }}</p>
         <p>Дата выдачи наряда: {{permit.dateDelivery}}</p>
-        <button type="submit">Сформировать наряд-допуск</button>
+        <a href="add_permit_in_bd/">Сформировать наряд-допуск</a>
     </div>
 </form>
 {% endblock %}
