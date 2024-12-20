@@ -5,6 +5,7 @@ from django.views.generic import ListView
 from django_filters import FilterSet
 from django_filters.views import FilterView
 from django_tables2 import SingleTableView, SingleTableMixin
+from django.forms import formset_factory
 
 from .myModels import Work_is_mymodel, Manager_is_mymodel, Executor_is_mymodel, Director_is_mymodel, Permit_is_mymodel, ShiftManager_is_mymodel
 from .myFunc import insert_into_doc
@@ -12,7 +13,7 @@ from .dbFunc import select_in_db
 
 from .models import Employee, Permit, Department
 
-from .forms import LinePermit, ChoiceDirector, ChoiceManager, DepartmentForm
+from .forms import LinePermit, LoginForm, ChoiceManager, DepartmentForm, WorkerGroup
 from .tables import PersonTable
 from .filters import MyFilter
 import random
@@ -29,6 +30,19 @@ class ListViews(SingleTableMixin, FilterView):
 
 
 def authFunc(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/currentPermit/')
+    else:
+        form = LoginForm()
+    return render(request, 'hello/authorization/index.html', {'form': form})
+
 
     if request.method == 'POST':
         username = request.POST.get('login')
@@ -51,8 +65,12 @@ def work_permit(request):
 
     form_department = DepartmentForm()
 
+    #TestForm = formset_factory(WorkerGroup, extra=4)
+    #testForm = TestForm()
+
     context = {
         "form_department": form_department,
+
     }
     return render(request, 'hello/workPermit/workPermit.html', context)
 
@@ -78,6 +96,8 @@ def lists(request):
     model = Permit.objects.all()
     filterset_class = MyFilter(request.GET, model)
     table = PersonTable(filterset_class.qs)
+
+
     return render(request=request, template_name='hello/currentWorkPermits/currentWork.html',
                   context={"model":model, "table":table, "filterset_class":filterset_class})
 
@@ -148,6 +168,7 @@ def postManager(request):
 def postExecutor(request):
     if request.method == "POST":
         search_query = request.POST.get('search_executor')
+        count_worker = request.POST.get('count_member')
         user_from_db = select_in_db(search_query)
         if user_from_db is not None:
             for user in user_from_db:
@@ -250,7 +271,9 @@ def resultPermit(request):
             new_permit.director = Employee.objects.get(id=user_from_permit['director'])
 
             new_permit.work_description = request.POST.get("work")
-            new_permit.start_of_work = request.POST.get("dateStart")
+            d = request.POST.get("dateStart")
+            t = request.POST.get("timeStart")
+            new_permit.start_of_work = d + " " + t
             new_permit.end_of_work = request.POST.get("dateEnd")
             new_permit.condition = request.POST.get("conditions")
 
@@ -258,11 +281,13 @@ def resultPermit(request):
 
             new_permit.to_docx()
             data = Permit(number=new_permit.number, master_of_work=new_permit.master_of_work,
-                          executor=new_permit.executor, director=new_permit.director,
+                          executor=new_permit.executor, director=new_permit.director, daily_manager=new_permit.daily_manager,
                           station_engineer=new_permit.station_engineer, work_description=new_permit.work_description,
-                          start_of_work=new_permit.start_of_work, end_of_work=new_permit.end_of_work)
+                          start_of_work=new_permit.start_of_work, end_of_work=new_permit.end_of_work,
+                          condition=new_permit.condition ,countWorker=new_permit.countWorker, department=new_permit.department,
+                          )
             data.save()
-            return HttpResponse("SUC")
+            return HttpResponse("Наряд успешно сформирован!")
 
         #     #Тут собираем данные о месте проведении работы и датах
         #     work = Work_is_mymodel()

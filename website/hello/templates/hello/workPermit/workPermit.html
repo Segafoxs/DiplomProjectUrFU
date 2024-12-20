@@ -53,20 +53,7 @@
             <input type="text" name="search_executor" id="form31Examplev3" class="form-control form-control-lg" placeholder="ФИО"/>
             <label class="form-label" for="form3Examplev3">Производитель работ</label>
         </div>
-        <div class="col-md-4 mb-4 pb-2">
-            <button class="btn btn-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
-            </svg></button>
-        </div>
-        </div>
-    </form>
-    <form method="post" action="postWorker/">
-            {% csrf_token %}
-        <div class="row">
-        <div class="col-md-4 mb-4 pb-2">
-            <input type="text" name="search_worker" id="form321Examplev3" class="form-control form-control-lg" placeholder="ФИО"/>
-            <label class="form-label" for="form3Examplev3">Член бригады</label>
-        </div>
+
         <div class="col-md-4 mb-4 pb-2">
             <button class="btn btn-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
@@ -126,6 +113,7 @@
         </div>
     </form>
 
+
     <form method="post" action="resultWorkPermit/">
                 {% csrf_token %}
         <div class="row align-items-center py-3">
@@ -135,13 +123,22 @@
             </div>
         </div>
 
-            <div class="col-md-2 mb-4 pb-2">
+<!--        динамические поля-->
+<!--        <div class="row align-items-center py-3">-->
+<!--            <div class="col-md-2 mb-4 pb-2">-->
+<!--                {% csrf_token %}-->
+<!--                {% for form in testForm %}-->
+<!--                {{ form }}-->
+<!--                {% endfor %}-->
+
+<!--            </div>-->
+<!--        </div>-->
+        <div class="col-md-2 mb-4 pb-2">
                       <div data-mdb-input-init class="form-outline">
                         <input type="text" name=countMember id="form3Examplev41" class="form-control form-control-lg" />
                         <label class="form-label" for="form3Examplev2">Количество членов бригады</label>
                       </div>
                     </div>
-
             <div class="row align-items-center py-3">
               <div class="col-md-7 pe-5">
 

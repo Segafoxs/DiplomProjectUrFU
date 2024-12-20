@@ -3,6 +3,11 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from docxtpl import DocxTemplate
+from django.contrib.auth.hashers import make_password
+from django.utils import timezone
+import datetime
+
+from cryptography.fernet import Fernet
 
 
 # Create your models here.
@@ -82,6 +87,7 @@ class Employee(AbstractBaseUser, PermissionsMixin):
         return self.name
 
 
+
 class Permit(models.Model):
     statusPermit = {
         "approval": "На согласовании",
@@ -146,10 +152,13 @@ class Permit(models.Model):
     def to_docx(self):
         doc = DocxTemplate("C:\\Users\\Сергей\\Desktop\\Шаблоны для ЭНД\\test.docx")
         context = {
+            'number': self.number,
+            'department': self.department,
             'manager': self.master_of_work,
             'managerPost': self.master_of_work,
             'executor': self.executor,
             'executorPost': self.executor,
+            'countMember': self.countWorker,
             'member': self.employ,
             'work': self.work_description,
             'dateStart': self.start_of_work,
@@ -159,8 +168,8 @@ class Permit(models.Model):
             'conditions': self.condition,
             'director': self.director,
             'directorPost': self.director,
-            'personal': self.executor,
-            'personalPost': self.executor
+            'personal': self.station_engineer,
+            'personalPost': self.daily_manager
         }
         doc.render(context)
 
